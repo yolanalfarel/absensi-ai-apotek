@@ -78,11 +78,11 @@ async function start(){
     statusText.innerHTML =
     "🧠 Loading AI Model...";
 
-    await faceapi.nets.tinyFaceDetector.loadFromUri('./models');
+    await faceapi.nets.tinyFaceDetector.loadFromUri('./weights');
 
-    await faceapi.nets.faceLandmark68Net.loadFromUri('./models');
+    await faceapi.nets.faceLandmark68Net.loadFromUri('./weights');
 
-    await faceapi.nets.faceRecognitionNet.loadFromUri('./models');
+    await faceapi.nets.faceRecognitionNet.loadFromUri('./weights');
 
     statusText.innerHTML =
     "📸 Membuka kamera...";
