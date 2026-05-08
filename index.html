@@ -110,7 +110,91 @@ async function start(){
 
 }
 
-window.onload = start;
+let faceMatcher;
+
+async function loadLabeledImages(){
+
+  const labels = [
+
+    "AL_HAFIZ",
+    "MEISYI_AMALIA",
+    "PUTRI_SINTA"
+
+  ];
+
+  return Promise.all(
+
+    labels.map(async label => {
+
+      const img = await faceapi.fetchImage(
+        `./database_wajah/${label}.jpg`
+      );
+
+      const detections =
+      await faceapi
+      .detectSingleFace(
+        img,
+        new faceapi.TinyFaceDetectorOptions()
+      )
+      .withFaceLandmarks()
+      .withFaceDescriptor();
+
+      return new faceapi.LabeledFaceDescriptors(
+        label,
+        [detections.descriptor]
+      );
+
+    })
+
+  );
+
+}
+
+async function startRecognition(){
+
+  const labeledDescriptors =
+  await loadLabeledImages();
+
+  faceMatcher =
+  new faceapi.FaceMatcher(
+    labeledDescriptors,
+    0.6
+  );
+
+  setInterval(async ()=>{
+
+    const detections =
+    await faceapi
+    .detectAllFaces(
+      video,
+      new faceapi.TinyFaceDetectorOptions()
+    )
+    .withFaceLandmarks()
+    .withFaceDescriptors();
+
+    if(detections.length > 0){
+
+      const bestMatch =
+      faceMatcher.findBestMatch(
+        detections[0].descriptor
+      );
+
+      statusText.innerHTML =
+      "👤 " + bestMatch.toString();
+
+    }
+
+  },1000);
+
+}
+
+window.onload = async ()=>{
+
+  await start();
+
+  await startRecognition();
+
+};
 
 </script>
 
