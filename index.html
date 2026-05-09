@@ -171,8 +171,8 @@ return new faceapi.LabeledFaceDescriptors(
 async function startRecognition(){
 
   const labeledDescriptors =
-(await loadLabeledImages())
-.filter(x => x !== null);
+  (await loadLabeledImages())
+  .filter(x => x !== null);
 
   faceMatcher =
   new faceapi.FaceMatcher(
@@ -202,14 +202,25 @@ async function startRecognition(){
 
       statusText.innerHTML =
       "👤 " + bestMatch.toString();
-  if(bestMatch.label !== "unknown"){
 
-  kirimAbsensi(bestMatch.label);
+      // JIKA WAJAH DIKENALI
+      if(
+        bestMatch.label !== "unknown"
+        &&
+        !sudahAbsen
+      ){
 
-}
+        await kirimAbsensi(
+          bestMatch.label
+        );
+
+      }
+
     }
 
   },1000);
+
+}
 
 }
 async function kirimAbsensi(nama){
