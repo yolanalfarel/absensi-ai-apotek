@@ -204,9 +204,7 @@ async function startRecognition(){
       "👤 " + bestMatch.toString();
   if(bestMatch.label !== "unknown"){
 
-  kirimAbsensi(
-    bestMatch.label
-  );
+  kirimAbsensi(bestMatch.label);
 
 }
     }
