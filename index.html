@@ -219,7 +219,11 @@ async function kirimAbsensi(nama){
   if(sudahAbsen) return;
 
   sudahAbsen = true;
+const audio = new Audio(
+"https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+);
 
+audio.play();
   statusText.innerHTML =
   "📸 Mengambil selfie...";
 
