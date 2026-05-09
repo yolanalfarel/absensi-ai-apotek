@@ -59,6 +59,7 @@ video{
 <h1>ABSENSI AI APOTEK</h1>
 
 <video id="video" autoplay muted playsinline></video>
+
 <canvas id="canvas" style="display:none;"></canvas>
 
 <div id="status">
@@ -70,11 +71,11 @@ video{
 <script>
 
 const video = document.getElementById("video");
-const canvas =
-document.getElementById("canvas");
-
-let sudahAbsen = false;
+const canvas = document.getElementById("canvas");
 const statusText = document.getElementById("status");
+
+let faceMatcher;
+let sudahAbsen = false;
 
 async function start(){
 
@@ -115,52 +116,48 @@ async function start(){
 
 }
 
-let faceMatcher;
-
 async function loadLabeledImages(){
 
   const labels = [
 
-  "Al_Hafiz",
-  "Meisyi_Amalia",
-  "Putri_Sinta",
-  "Delpi_Vira",
-  "Yolan_Alfarel"
+    "Al_Hafiz",
+    "Meisyi_Amalia",
+    "Putri_Sinta",
+    "Delpi_Vira",
+    "Yolan_Alfarel"
 
-];
+  ];
 
   return Promise.all(
 
     labels.map(async label => {
 
-      const img = await faceapi.fetchImage(
+      const img =
+      await faceapi.fetchImage(
         `./database_wajah/${label}.jpg`
       );
 
       const detections =
-await faceapi
-.detectSingleFace(
-  img,
-  new faceapi.TinyFaceDetectorOptions()
-)
-.withFaceLandmarks()
-.withFaceDescriptor();
-
-console.log(label);
-console.log(detections);
+      await faceapi
+      .detectSingleFace(
+        img,
+        new faceapi.TinyFaceDetectorOptions()
+      )
+      .withFaceLandmarks()
+      .withFaceDescriptor();
 
       if(!detections){
 
-  console.log("GAGAL DETEKSI:", label);
+        console.log("GAGAL DETEKSI:", label);
 
-  return null;
+        return null;
 
-}
+      }
 
-return new faceapi.LabeledFaceDescriptors(
-  label,
-  [detections.descriptor]
-);
+      return new faceapi.LabeledFaceDescriptors(
+        label,
+        [detections.descriptor]
+      );
 
     })
 
@@ -203,10 +200,11 @@ async function startRecognition(){
       statusText.innerHTML =
       "👤 " + bestMatch.toString();
 
-      // JIKA WAJAH DIKENALI
-      if(bestMatch.label !== "unknown" && !sudahAbsen){
-
-        console.log("KIRIM ABSENSI DIMULAI");
+      if(
+        bestMatch.label !== "unknown"
+        &&
+        !sudahAbsen
+      ){
 
         kirimAbsensi(bestMatch.label);
 
@@ -217,19 +215,20 @@ async function startRecognition(){
   },1000);
 
 }
-}
 
-}
 async function kirimAbsensi(nama){
 
   if(sudahAbsen) return;
 
   sudahAbsen = true;
-const audio = new Audio(
-"https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
-);
 
-audio.play();
+  const audio =
+  new Audio(
+    "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+  );
+
+  audio.play();
+
   statusText.innerHTML =
   "📸 Mengambil selfie...";
 
@@ -253,35 +252,52 @@ audio.play();
 
   statusText.innerHTML =
   "📤 Mengirim absensi...";
-  
-console.log("KIRIM ABSENSI DIMULAI");
-  
-  const response =
-  await fetch(
-    "https://script.google.com/macros/s/AKfycbx7fkoLgH6igHP17przjmxWaP8bQNG_6OcoQ3-Ug79A_vmZxK6_ibCdLC0u-W-JLtw3/exec",
-    {
-      method:"POST",
-      body:JSON.stringify({
 
-        nama:nama,
-        foto:foto
+  console.log("KIRIM ABSENSI DIMULAI");
 
-      })
-    }
-  );
+  try{
 
-const hasil =
-await response.json();
+    const response =
+    await fetch(
+      "https://script.google.com/macros/s/AKfycbx7fkoLgH6igHP17przjmxWaP8bQNG_6OcoQ3-Ug79A_vmZxK6_ibCdLC0u-W-JLtw3/exec",
+      {
+        method:"POST",
+        body:JSON.stringify({
 
-statusText.innerHTML =
-"✅ ABSEN BERHASIL";
+          nama:nama,
+          foto:foto
 
-setTimeout(()=>{
+        })
+      }
+    );
 
-  statusText.innerHTML =
-  "🎉 SELAMAT BEKERJA " + nama;
+    const hasil =
+    await response.json();
 
-},2000);
+    console.log(hasil);
+
+    statusText.innerHTML =
+    "✅ ABSEN BERHASIL";
+
+    setTimeout(()=>{
+
+      statusText.innerHTML =
+      "🎉 SELAMAT BEKERJA " + nama;
+
+    },2000);
+
+  }
+
+  catch(err){
+
+    console.log(err);
+
+    statusText.innerHTML =
+    "❌ GAGAL KIRIM ABSENSI";
+
+    sudahAbsen = false;
+
+  }
 
 }
 
