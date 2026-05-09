@@ -179,7 +179,7 @@ async function startRecognition(){
     if(detections.length > 0){
 
       const bestMatch = faceMatcher.findBestMatch(
-  detection.descriptor
+  detections[0].descriptor
 );
 
 console.log(bestMatch);
