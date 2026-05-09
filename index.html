@@ -160,7 +160,7 @@ async function startRecognition(){
   await loadLabeledImages();
 
   faceMatcher =
-  new faceapi.FaceMatcher(labeledDescriptors, 0.6)
+  new faceapi.FaceMatcher(
     labeledDescriptors,
     0.55
   );
@@ -179,10 +179,10 @@ async function startRecognition(){
     if(detections.length > 0){
 
       const bestMatch = faceMatcher.findBestMatch(
-  detections[0].descriptor
-);
+        detections[0].descriptor
+      );
 
-console.log(bestMatch);
+      console.log(bestMatch);
 
       statusText.innerHTML =
       "👤 " + bestMatch.toString();
