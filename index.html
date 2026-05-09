@@ -206,12 +206,9 @@ async function startRecognition(){
       // JIKA WAJAH DIKENALI
       if(bestMatch.label !== "unknown" && !sudahAbsen){
 
-  console.log("KIRIM ABSENSI DIMULAI");
+        console.log("KIRIM ABSENSI DIMULAI");
 
-  kirimAbsensi(bestMatch.label);
-
-}
-        );
+        kirimAbsensi(bestMatch.label);
 
       }
 
@@ -219,6 +216,7 @@ async function startRecognition(){
 
   },1000);
 
+}
 }
 
 }
@@ -287,13 +285,6 @@ setTimeout(()=>{
 
 }
 
-window.onload = async ()=>{
-
-  await start();
-
-  await startRecognition();
-
-};
 window.onload = async ()=>{
 
   await start();
