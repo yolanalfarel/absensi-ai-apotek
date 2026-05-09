@@ -253,8 +253,6 @@ async function kirimAbsensi(nama){
   statusText.innerHTML =
   "📤 Mengirim absensi...";
 
-  console.log("KIRIM ABSENSI DIMULAI");
-
   try{
 
     const response =
@@ -274,78 +272,102 @@ async function kirimAbsensi(nama){
     const hasil =
     await response.json();
 
-    // MATIKAN KAMERA
-video.srcObject.getTracks().forEach(track=>{
-  track.stop();
-});
     console.log(hasil);
 
     // MATIKAN KAMERA
-video.srcObject.getTracks().forEach(track=>{
-  track.stop();
-});
+    if(video.srcObject){
 
-// GANTI TAMPILAN
-document.body.innerHTML = `
+      video.srcObject
+      .getTracks()
+      .forEach(track => track.stop());
 
-<div style="
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:#eef2f7;
-font-family:Arial;
-padding:20px;
-">
+    }
 
-  <div style="
-  background:white;
-  padding:40px;
-  border-radius:30px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  max-width:400px;
-  width:100%;
-  ">
+    // TAMPILAN BERHASIL
+    document.body.innerHTML = `
 
-    <div style="font-size:90px;">
-      ✅
+    <div style="
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#eef2f7;
+    font-family:Arial;
+    padding:20px;
+    ">
+
+      <div style="
+      background:white;
+      padding:40px;
+      border-radius:30px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);
+      width:100%;
+      max-width:400px;
+      ">
+
+        <div style="font-size:90px;">
+          ✅
+        </div>
+
+        <h1 style="
+        color:#1e3a8a;
+        ">
+          ABSEN BERHASIL
+        </h1>
+
+        <p style="
+        font-size:24px;
+        font-weight:bold;
+        ">
+          ${nama.replaceAll("_"," ")}
+        </p>
+
+        <p style="
+        font-size:18px;
+        color:#444;
+        ">
+          Kamu sudah absen hari ini
+        </p>
+
+        <p style="
+        color:green;
+        font-weight:bold;
+        font-size:20px;
+        ">
+          🎉 Selamat bekerja
+        </p>
+
+      </div>
+
     </div>
 
-    <h1 style="
-    color:#1e3a8a;
-    margin-top:10px;
-    ">
-      ABSEN BERHASIL
-    </h1>
+    `;
 
-    <p style="
-    font-size:24px;
-    font-weight:bold;
-    margin-top:20px;
-    ">
-      ${nama.replaceAll("_"," ")}
-    </p>
+  }
 
-    <p style="
-    margin-top:15px;
-    font-size:18px;
-    color:#444;
-    ">
-      Kamu sudah absen hari ini.
-    </p>
+  catch(err){
 
-    <p style="
-    margin-top:10px;
-    color:green;
-    font-weight:bold;
-    font-size:20px;
-    ">
-      🎉 Selamat bekerja
-    </p>
+    console.log(err);
 
-  </div>
+    statusText.innerHTML =
+    "❌ GAGAL MENGIRIM ABSENSI";
 
-</div>
+    sudahAbsen = false;
 
-`;
+  }
+
+}
+
+window.onload = async ()=>{
+
+  await start();
+
+  await startRecognition();
+
+};
+
+</script>
+
+</body>
+</html>
