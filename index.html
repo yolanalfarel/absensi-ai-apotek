@@ -1233,6 +1233,18 @@ await startRecognition();
 };
   
 </script>
+/* LOAD */
+
+window.onload = async ()=>{
+
+await start();
+
+await startRecognition();
+
+};
+
+/* TUTUP APLIKASI */
+
 function tutupAplikasi(){
 
 document.body.innerHTML = `
@@ -1242,14 +1254,12 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-
 background:
 linear-gradient(
 135deg,
 #fff0f7,
 #edf4ff
 );
-
 font-family:Poppins;
 padding:20px;
 overflow:hidden;
@@ -1257,18 +1267,12 @@ overflow:hidden;
 
 <div style="
 background:rgba(255,255,255,0.8);
-
 backdrop-filter:blur(25px);
-
 padding:45px 35px;
-
 border-radius:40px;
-
 text-align:center;
-
 width:100%;
 max-width:380px;
-
 box-shadow:
 0 10px 40px rgba(0,0,0,0.1),
 0 0 25px #ff00aa33,
@@ -1285,16 +1289,13 @@ margin-bottom:20px;
 <h1 style="
 font-size:40px;
 font-weight:700;
-
 margin-bottom:18px;
-
 background:
 linear-gradient(
 90deg,
 #0055ff,
 #ff00aa
 );
-
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 ">
@@ -1324,41 +1325,8 @@ Absensi berhasil tersimpan
 `;
 
 }
+
 </script>
-<h1 style="
-font-size:38px;
-font-weight:700;
-margin-bottom:18px;
-background:
-linear-gradient(
-90deg,
-#0055ff,
-#ff00aa
-);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-">
-TERIMA KASIH
-</h1>
 
-<p style="
-font-size:20px;
-color:#555;
-line-height:1.8;
-margin-bottom:10px;
-">
-Sampai jumpa kembali 👋
-</p>
-
-<p style="
-font-size:16px;
-color:#888;
-">
-Absensi berhasil tersimpan
-</p>
-
-</div>
-
-</div>
 </body>
 </html>
