@@ -852,113 +852,50 @@ margin-bottom:35px;
 🎉 Selamat bekerja
 </p>
 
-<button
-id="btnKeluar"
+<a
+href="https://yolanalfarel.github.io/absensi-ai-apotek/"
 style="
+display:block;
+text-decoration:none;
+text-align:center;
+
 padding:16px 30px;
-border:none;
+
 border-radius:18px;
+
 background:linear-gradient(
 135deg,
 #0055ff,
 #ff008c
 );
+
 color:white;
+
 font-size:18px;
 font-weight:bold;
-cursor:pointer;
+
 width:100%;
+
 position:relative;
 z-index:999999;
+
 pointer-events:auto;
+
 touch-action:manipulation;
+
 box-shadow:
 0 0 25px rgba(255,0,170,0.4);
 ">
 
-🚪 KELUAR APLIKASI
+❌ KELUAR APLIKASI
 
-</button>
-
-</div>
-
-</div>
-
-`;
-
-setTimeout(()=>{
-
-const btnKeluar =
-document.getElementById("btnKeluar");
-
-if(btnKeluar){
-
-btnKeluar.addEventListener(
-"click",
-function(){
-
-document.body.innerHTML = `
-
-<div style="
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:
-linear-gradient(
-135deg,
-#ffe4f6,
-#e6f0ff
-);
-font-family:Poppins;
-padding:20px;
-">
-
-<div style="
-background:white;
-padding:40px;
-border-radius:35px;
-text-align:center;
-box-shadow:
-0 0 40px rgba(255,0,170,0.2);
-width:100%;
-max-width:350px;
-">
-
-<div style="
-font-size:90px;
-margin-bottom:15px;
-">
-👋
-</div>
-
-<h1 style="
-color:#4f46e5;
-margin-bottom:15px;
-">
-TERIMA KASIH
-</h1>
-
-<p style="
-color:#666;
-font-size:18px;
-line-height:1.7;
-">
-Sampai jumpa kembali
-</p>
+</a>
 
 </div>
 
 </div>
 
 `;
-
-}
-);
-
-}
-
-},300);
 
 }catch(err){
 
