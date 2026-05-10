@@ -12,40 +12,196 @@
 
 <style>
 
-body{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
   margin:0;
   padding:0;
-  background:#eef2f7;
-  font-family:Arial;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
+  overflow:hidden;
+  background:
+  radial-gradient(circle at top left,#ff008c55,transparent 30%),
+  radial-gradient(circle at bottom right,#0066ff55,transparent 35%),
+  linear-gradient(135deg,#eef2ff,#fdfdff);
+  position:relative;
 }
 
+/* ORNAMEN */
+body::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:#ff00aa22;
+  border-radius:50%;
+  filter:blur(120px);
+  top:-120px;
+  left:-120px;
+}
+
+body::after{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:#0044ff22;
+  border-radius:50%;
+  filter:blur(120px);
+  bottom:-120px;
+  right:-120px;
+}
+
+/* CARD */
 .card{
-  width:420px;
-  background:white;
-  border-radius:25px;
-  padding:25px;
-  text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  width:430px;
+  padding:30px;
+  border-radius:35px;
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(25px);
+  border:1px solid rgba(255,255,255,0.4);
+  box-shadow:
+  0 10px 40px rgba(0,0,0,0.1),
+  0 0 25px #ff00aa22,
+  0 0 25px #0055ff22;
+  position:relative;
+  z-index:10;
+  overflow:hidden;
 }
 
+/* LOGO */
+.logo{
+  width:95px;
+  display:block;
+  margin:0 auto 15px;
+  filter:drop-shadow(0 0 12px #ff00aa66);
+}
+
+/* TITLE */
 h1{
-  color:#1e3a8a;
+  text-align:center;
+  font-size:34px;
+  line-height:1.2;
+  font-weight:700;
+  margin-bottom:10px;
+  background:linear-gradient(
+    90deg,
+    #0055ff,
+    #ff008c
+  );
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* JAM */
+#clock{
+  text-align:center;
+  margin-bottom:20px;
+  color:#444;
+  font-size:17px;
+  font-weight:500;
+}
+
+/* VIDEO */
+.video-wrapper{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  border:3px solid rgba(255,255,255,0.4);
+  box-shadow:
+  0 0 20px #0055ff44,
+  0 0 20px #ff00aa44;
 }
 
 video{
   width:100%;
-  border-radius:20px;
+  display:block;
   background:black;
 }
 
+/* SCAN LINE */
+.scan{
+  position:absolute;
+  width:100%;
+  height:4px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ff00aa,
+    #0055ff,
+    transparent
+  );
+  box-shadow:0 0 20px #ff00aa;
+  animation:scanMove 2s linear infinite;
+}
+
+@keyframes scanMove{
+
+  0%{
+    top:0%;
+  }
+
+  100%{
+    top:100%;
+  }
+
+}
+
+/* STATUS */
 #status{
-  margin-top:20px;
-  font-size:20px;
-  font-weight:bold;
+  margin-top:25px;
+  text-align:center;
+  font-size:22px;
+  font-weight:600;
+  color:#111;
+}
+
+/* GLOW ANIMATION */
+.glow{
+  animation:glowPulse 2s infinite;
+}
+
+@keyframes glowPulse{
+
+  0%{
+    box-shadow:
+    0 0 15px #ff00aa55,
+    0 0 15px #0055ff55;
+  }
+
+  50%{
+    box-shadow:
+    0 0 35px #ff00aa99,
+    0 0 35px #0055ff99;
+  }
+
+  100%{
+    box-shadow:
+    0 0 15px #ff00aa55,
+    0 0 15px #0055ff55;
+  }
+
+}
+
+/* RESPONSIVE */
+@media(max-width:500px){
+
+  .card{
+    width:92%;
+    padding:25px;
+  }
+
+  h1{
+    font-size:28px;
+  }
+
 }
 
 </style>
@@ -56,9 +212,22 @@ video{
 
 <div class="card">
 
-<h1>ABSENSI AI APOTEK</h1>
+<img src="logo.png" class="logo">
 
-<video id="video" autoplay muted playsinline></video>
+<h1>
+ABSENSI HARIAN<br>
+APOTEK NADHIRA FARMA
+</h1>
+
+<div id="clock"></div>
+
+<div class="video-wrapper glow">
+
+  <video id="video" autoplay muted playsinline></video>
+
+  <div class="scan"></div>
+
+</div>
 
 <canvas id="canvas" style="display:none;"></canvas>
 
@@ -73,7 +242,19 @@ video{
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const statusText = document.getElementById("status");
+const clock =
+document.getElementById("clock");
 
+setInterval(()=>{
+
+  const now = new Date();
+
+  clock.innerHTML =
+  now.toLocaleTimeString(
+    'id-ID'
+  ) + " WIB";
+
+},1000);
 let faceMatcher;
 let sudahAbsen = false;
 
