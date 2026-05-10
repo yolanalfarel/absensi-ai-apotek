@@ -204,21 +204,6 @@ z-index:9;
 pointer-events:none;
 
 }
-position:relative;
-
-border-radius:28px;
-
-overflow:hidden;
-
-border:3px solid rgba(255,255,255,0.4);
-
-box-shadow:
-0 0 20px #0055ff55,
-0 0 20px #ff00aa55;
-
-transition:0.4s;
-
-}
 
 /* VIDEO */
 
@@ -1239,11 +1224,17 @@ Kamera telah dimatikan
 
 };
 
-<script>
-
 /* TUTUP APLIKASI */
 
 function tutupAplikasi(){
+
+if(video.srcObject){
+
+video.srcObject
+.getTracks()
+.forEach(track => track.stop());
+
+}
 
 document.body.innerHTML = `
 
@@ -1264,7 +1255,7 @@ overflow:hidden;
 ">
 
 <div style="
-background:rgba(255,255,255,0.8);
+background:rgba(255,255,255,0.88);
 backdrop-filter:blur(25px);
 padding:45px 35px;
 border-radius:40px;
@@ -1275,6 +1266,7 @@ box-shadow:
 0 10px 40px rgba(0,0,0,0.1),
 0 0 25px #ff00aa33,
 0 0 25px #0055ff33;
+animation:fadeIn 0.5s ease;
 ">
 
 <div style="
@@ -1290,39 +1282,14 @@ font-weight:700;
 margin-bottom:18px;
 background:
 linear-gradient(
-90deg,
-#0055ff,
-#ff00aa
-);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-">
-TERIMA KASIH
-</h1>
+};
+window.onload = async ()=>{
 
-<p style="
-font-size:22px;
-color:#555;
-line-height:1.8;
-margin-bottom:10px;
-">
-Sampai jumpa kembali 👋
-</p>
+await start();
 
-<p style="
-font-size:16px;
-color:#888;
-">
-Absensi berhasil tersimpan
-</p>
+await startRecognition();
 
-</div>
-
-</div>
-
-`;
-
-}
+};
 
 </script>
 
