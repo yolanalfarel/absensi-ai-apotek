@@ -513,17 +513,7 @@ style="display:none;">
 </button>
 
 </div>
-window.addEventListener("hashchange", ()=>{
 
-if(location.hash === "#terimakasih"){
-
-document
-.getElementById("terimakasih")
-.style.display = "flex";
-
-}
-
-});
 <script>
 
 const video =
@@ -1331,6 +1321,17 @@ function tutupAplikasi(){
   `;
 
 }
+window.addEventListener("hashchange", ()=>{
+
+if(location.hash === "#terimakasih"){
+
+document
+.getElementById("terimakasih")
+.style.display = "flex";
+
+}
+
+});  
 </script>
 <div id="terimakasih" style="
 display:none;
