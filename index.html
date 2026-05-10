@@ -1089,8 +1089,9 @@ margin-bottom:35px;
 🎉 Selamat bekerja
 </p>
 
-<button
+<div
 id="btnKeluar"
+
 style="
 margin-top:35px;
 
@@ -1105,8 +1106,6 @@ align-items:center;
 
 margin-left:auto;
 margin-right:auto;
-
-border:none;
 
 border-radius:24px;
 
@@ -1128,13 +1127,19 @@ box-shadow:
 0 12px 35px rgba(255,0,170,0.35);
 
 cursor:pointer;
+
+-webkit-tap-highlight-color:transparent;
+
+touch-action:manipulation;
+
+user-select:none;
 "
 
 >
 
 ❌ KELUAR APLIKASI
 
-</button>
+</div>
 
 </div>
 
@@ -1149,14 +1154,167 @@ document.getElementById("btnKeluar");
 
 if(btn){
 
-btn.onclick = tutupAplikasi;
+btn.addEventListener("touchstart", ()=>{
 
-btn.ontouchstart = tutupAplikasi;
+document.body.innerHTML = `
+
+<div style="
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(
+135deg,
+#fff0f7,
+#edf4ff
+);
+font-family:Poppins;
+padding:20px;
+">
+
+<div style="
+background:white;
+padding:45px 35px;
+border-radius:40px;
+text-align:center;
+max-width:380px;
+width:100%;
+box-shadow:
+0 10px 40px rgba(0,0,0,0.1),
+0 0 25px #ff00aa33,
+0 0 25px #0055ff33;
+">
+
+<div style="
+font-size:100px;
+margin-bottom:15px;
+">
+👋
+</div>
+
+<h1 style="
+font-size:38px;
+font-weight:700;
+margin-bottom:18px;
+background:
+linear-gradient(
+90deg,
+#0055ff,
+#ff00aa
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+">
+TERIMA KASIH
+</h1>
+
+<p style="
+font-size:20px;
+color:#555;
+line-height:1.8;
+margin-bottom:10px;
+">
+Sampai jumpa kembali 👋
+</p>
+
+<p style="
+font-size:16px;
+color:#888;
+">
+Absensi berhasil tersimpan
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+btn.addEventListener("click", ()=>{
+
+document.body.innerHTML = `
+
+<div style="
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(
+135deg,
+#fff0f7,
+#edf4ff
+);
+font-family:Poppins;
+padding:20px;
+">
+
+<div style="
+background:white;
+padding:45px 35px;
+border-radius:40px;
+text-align:center;
+max-width:380px;
+width:100%;
+box-shadow:
+0 10px 40px rgba(0,0,0,0.1),
+0 0 25px #ff00aa33,
+0 0 25px #0055ff33;
+">
+
+<div style="
+font-size:100px;
+margin-bottom:15px;
+">
+👋
+</div>
+
+<h1 style="
+font-size:38px;
+font-weight:700;
+margin-bottom:18px;
+background:
+linear-gradient(
+90deg,
+#0055ff,
+#ff00aa
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+">
+TERIMA KASIH
+</h1>
+
+<p style="
+font-size:20px;
+color:#555;
+line-height:1.8;
+margin-bottom:10px;
+">
+Sampai jumpa kembali 👋
+</p>
+
+<p style="
+font-size:16px;
+color:#888;
+">
+Absensi berhasil tersimpan
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 }
 
 },300);
-
 }catch(err){
 
 console.log(err);
