@@ -178,63 +178,7 @@ top:100%;
 /* AI GRID */
 
 .face-grid{
-  /* FACE AI SCAN */
 
-.face-scan{
-position:absolute;
-inset:0;
-pointer-events:none;
-}
-
-/* TITIK AI */
-
-.face-dot{
-position:absolute;
-width:10px;
-height:10px;
-border-radius:50%;
-
-background:#00ffee;
-
-box-shadow:
-0 0 15px #00ffee,
-0 0 25px #00ffee;
-
-animation:pulseDot 1.5s infinite;
-}
-
-/* POSISI TITIK */
-
-.dot1{top:28%;left:50%;}
-.dot2{top:38%;left:38%;}
-.dot3{top:38%;left:62%;}
-.dot4{top:50%;left:50%;}
-.dot5{top:60%;left:42%;}
-.dot6{top:60%;left:58%;}
-.dot7{top:72%;left:50%;}
-.dot8{top:48%;left:32%;}
-.dot9{top:48%;left:68%;}
-
-/* ANIMASI */
-
-@keyframes pulseDot{
-
-0%{
-transform:scale(0.8);
-opacity:0.5;
-}
-
-50%{
-transform:scale(1.4);
-opacity:1;
-}
-
-100%{
-transform:scale(0.8);
-opacity:0.5;
-}
-
-}
 position:absolute;
 inset:0;
 
@@ -256,12 +200,72 @@ background-size:35px 35px;
 animation:gridPulse 2s infinite;
 
 pointer-events:none;
+
+}
+
+/* AI FACE */
+
+.face-scan{
+position:absolute;
+inset:0;
+pointer-events:none;
+z-index:10;
+}
+
+/* DOT */
+
+.face-dot{
+position:absolute;
+width:10px;
+height:10px;
+border-radius:50%;
+
+background:#00ffee;
+
+box-shadow:
+0 0 15px #00ffee,
+0 0 25px #00ffee;
+
+animation:pulseDot 1.5s infinite;
+}
+
+/* POSISI */
+
+.dot1{top:28%;left:50%;}
+.dot2{top:38%;left:38%;}
+.dot3{top:38%;left:62%;}
+.dot4{top:50%;left:50%;}
+.dot5{top:60%;left:42%;}
+.dot6{top:60%;left:58%;}
+.dot7{top:72%;left:50%;}
+.dot8{top:48%;left:32%;}
+.dot9{top:48%;left:68%;}
+
+/* ANIMASI */
+
+@keyframes pulseDot{
+
+0%{
+transform:scale(0.8);
+opacity:0.5;
+}
+
+50%{
+transform:scale(1.5);
+opacity:1;
+}
+
+100%{
+transform:scale(0.8);
+opacity:0.5;
+}
+
 }
 
 @keyframes gridPulse{
 
 0%{
-opacity:0;
+opacity:0.2;
 }
 
 50%{
@@ -269,7 +273,7 @@ opacity:1;
 }
 
 100%{
-opacity:0;
+opacity:0.2;
 }
 
 }
@@ -682,13 +686,19 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-background:#eef2f7;
+background:
+linear-gradient(
+135deg,
+#fff0f7,
+#edf4ff
+);
 font-family:Poppins;
 padding:20px;
 ">
 
 <div style="
-background:white;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(20px);
 padding:40px;
 border-radius:35px;
 text-align:center;
@@ -698,69 +708,63 @@ box-shadow:
 0 10px 40px rgba(0,0,0,0.1),
 0 0 25px #ff00aa33,
 0 0 25px #0055ff33;
+border:1px solid rgba(255,255,255,0.5);
 ">
 
 <div style="
-font-size:90px;
+font-size:95px;
+margin-bottom:10px;
+animation:pulse 1.5s infinite;
 ">
 ✅
 </div>
 
 <h1 style="
-color:#0055ff;
+font-size:38px;
+font-weight:700;
 margin-bottom:15px;
+background:linear-gradient(
+90deg,
+#0055ff,
+#ff008c
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 ">
 ABSEN BERHASIL
 </h1>
 
 <p style="
-font-size:26px;
+font-size:28px;
 font-weight:bold;
-margin-bottom:10px;
+margin-bottom:15px;
+color:#111;
 ">
 ${nama.replaceAll("_"," ")}
 </p>
 
 <p style="
 font-size:18px;
-color:#555;
-margin-bottom:20px;
+color:#666;
+line-height:1.7;
+margin-bottom:25px;
 ">
 Kamu sudah absen hari ini
 </p>
 
 <p style="
-font-size:20px;
+font-size:22px;
 font-weight:bold;
 color:#00aa55;
-margin-bottom:30px;
+margin-bottom:35px;
 ">
 🎉 Selamat bekerja
+</p>
+
 <button
 onclick="tutupAplikasi()"
 style="
-margin-top:25px;
-padding:14px 30px;
-border:none;
-border-radius:15px;
-background:
-linear-gradient(
-90deg,
-#ff008c,
-#4f46e5
-);
-color:white;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:
-0 0 20px rgba(255,0,170,0.4);
-">
-
-</p>
-
-<button onclick="window.location.href='https://yolanalfarel.github.io/absensi-ai-apotek/'" style="
-padding:15px 28px;
+padding:16px 30px;
 border:none;
 border-radius:18px;
 background:linear-gradient(
@@ -769,13 +773,22 @@ background:linear-gradient(
 #ff008c
 );
 color:white;
-font-size:16px;
+font-size:18px;
 font-weight:bold;
 cursor:pointer;
+width:100%;
+
+position:relative;
+z-index:99999;
+pointer-events:auto;
+touch-action:manipulation;
+
 box-shadow:
-0 0 20px #0055ff55;
+0 0 25px rgba(255,0,170,0.4);
 ">
+
 ❌ KELUAR APLIKASI
+
 </button>
 
 </div>
