@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ABSENSI AI APOTEK</title>
+<title>ABSENSI APOTEK</title>
 
 <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
 
@@ -15,261 +15,267 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-  font-family:'Poppins',sans-serif;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  background:
-  radial-gradient(circle at top left,#ff008c55,transparent 30%),
-  radial-gradient(circle at bottom right,#0066ff55,transparent 35%),
-  linear-gradient(135deg,#eef2ff,#fdfdff);
-  position:relative;
-  padding:20px;
-overflow-y:auto;
+font-family:'Poppins',sans-serif;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+radial-gradient(circle at top left,#ff008c55,transparent 30%),
+radial-gradient(circle at bottom right,#0066ff55,transparent 35%),
+linear-gradient(135deg,#eef2ff,#fdfdff);
+padding:20px;
+overflow:hidden;
 }
 
-/* ORNAMEN */
+/* BACKGROUND GLOW */
+
 body::before{
-  content:"";
-  position:absolute;
-  width:500px;
-  height:500px;
-  background:#ff00aa22;
-  border-radius:50%;
-  filter:blur(120px);
-  top:-120px;
-  left:-120px;
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:#ff00aa22;
+border-radius:50%;
+filter:blur(120px);
+top:-150px;
+left:-150px;
 }
 
 body::after{
-  content:"";
-  position:absolute;
-  width:500px;
-  height:500px;
-  background:#0044ff22;
-  border-radius:50%;
-  filter:blur(120px);
-  bottom:-120px;
-  right:-120px;
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:#0044ff22;
+border-radius:50%;
+filter:blur(120px);
+bottom:-150px;
+right:-150px;
 }
 
 /* CARD */
+
 .card{
-  width:430px;
-  padding:30px;
-  border-radius:35px;
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(25px);
-  border:1px solid rgba(255,255,255,0.4);
-  box-shadow:
-  0 10px 40px rgba(0,0,0,0.1),
-  0 0 25px #ff00aa22,
-  0 0 25px #0055ff22;
-  position:relative;
-  z-index:10;
-  overflow:hidden;
+width:100%;
+max-width:420px;
+padding:28px;
+border-radius:35px;
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,0.5);
+box-shadow:
+0 10px 40px rgba(0,0,0,0.1),
+0 0 25px #ff00aa33,
+0 0 25px #0055ff33;
+position:relative;
+z-index:5;
 }
 
 /* LOGO */
+
 .logo{
-  width:95px;
-  display:block;
-  margin:0 auto 15px;
-  filter:drop-shadow(0 0 12px #ff00aa66);
+width:90px;
+display:block;
+margin:0 auto 15px;
+mix-blend-mode:multiply;
+filter:
+drop-shadow(0 0 15px #ff00aa66);
 }
 
 /* TITLE */
+
 h1{
-  text-align:center;
-  font-size:34px;
-  line-height:1.2;
-  font-weight:700;
-  margin-bottom:10px;
-  background:linear-gradient(
-    90deg,
-    #0055ff,
-    #ff008c
-  );
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+text-align:center;
+font-size:34px;
+line-height:1.2;
+font-weight:700;
+margin-bottom:10px;
+
+background:linear-gradient(
+90deg,
+#0055ff,
+#ff008c
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-/* JAM */
+/* CLOCK */
+
 #clock{
-  text-align:center;
-  margin-bottom:20px;
-  color:#444;
-  font-size:17px;
-  font-weight:500;
+text-align:center;
+font-size:18px;
+font-weight:600;
+color:#444;
+margin-bottom:20px;
 }
 
 /* VIDEO */
+
 .video-wrapper{
-  position:relative;
-  border-radius:28px;
-  overflow:hidden;
-  border:3px solid rgba(255,255,255,0.4);
-  box-shadow:
-  0 0 20px #0055ff44,
-  0 0 20px #ff00aa44;
+position:relative;
+border-radius:28px;
+overflow:hidden;
+
+border:3px solid rgba(255,255,255,0.4);
+
+box-shadow:
+0 0 20px #0055ff55,
+0 0 20px #ff00aa55;
+
+transition:0.4s;
 }
 
 video{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  display:block;
-  background:black;
-  transform:scaleX(-1);
+width:100%;
+height:330px;
+object-fit:cover;
+background:black;
+display:block;
+transform:scaleX(-1);
 }
 
-/* SCAN LINE */
+/* SCAN */
+
 .scan{
-  position:absolute;
-  width:100%;
-  height:4px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #ff00aa,
-    #0055ff,
-    transparent
-  );
-  box-shadow:0 0 20px #ff00aa;
-  animation:scanMove 2s linear infinite;
+position:absolute;
+width:100%;
+height:4px;
+
+background:linear-gradient(
+90deg,
+transparent,
+#ff00aa,
+#0055ff,
+transparent
+);
+
+box-shadow:0 0 20px #ff00aa;
+
+animation:scanMove 2s linear infinite;
 }
 
 @keyframes scanMove{
-.face-grid{
-  position:absolute;
-  inset:0;
 
-  background:
-
-  linear-gradient(
-    rgba(255,255,255,0.08) 1px,
-    transparent 1px
-  ),
-
-  linear-gradient(
-    90deg,
-    rgba(255,255,255,0.08) 1px,
-    transparent 1px
-  );
-
-  background-size:35px 35px;
-
-  opacity:0;
-
-  animation:gridPulse 2s infinite;
-
-  pointer-events:none;
+0%{
+top:0%;
 }
 
-/* ANIMASI GRID */
+100%{
+top:100%;
+}
+
+}
+
+/* AI GRID */
+
+.face-grid{
+position:absolute;
+inset:0;
+
+background:
+
+linear-gradient(
+rgba(255,255,255,0.08) 1px,
+transparent 1px
+),
+
+linear-gradient(
+90deg,
+rgba(255,255,255,0.08) 1px,
+transparent 1px
+);
+
+background-size:35px 35px;
+
+animation:gridPulse 2s infinite;
+
+pointer-events:none;
+}
+
 @keyframes gridPulse{
 
-  0%{
-    opacity:0;
-    transform:scale(1);
-  }
-
-  50%{
-    opacity:1;
-    transform:scale(1.02);
-  }
-
-  100%{
-    opacity:0;
-    transform:scale(1);
-  }
-
+0%{
+opacity:0;
 }
-  0%{
-    top:0%;
-  }
 
-  100%{
-    top:100%;
-  }
+50%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+}
 
 }
 
 /* STATUS */
+
 #status{
-  margin-top:25px;
-  text-align:center;
-  font-size:22px;
-  font-weight:600;
-  color:#111;
+margin-top:22px;
+text-align:center;
+font-size:22px;
+font-weight:600;
+color:#111;
+line-height:1.5;
 }
+
+/* BUTTON */
+
 #btnBatal{
-  margin-top:25px;
-  padding:14px 25px;
-  border:none;
-  border-radius:18px;
-  background:linear-gradient(135deg,#ff0066,#7b2ff7);
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:
-  0 0 20px rgba(255,0,102,0.4);
-  display:block;
+margin-top:22px;
+width:220px;
+display:block;
 margin-left:auto;
 margin-right:auto;
-width:220px;
+
+padding:14px 20px;
+border:none;
+border-radius:18px;
+
+background:linear-gradient(
+135deg,
+#ff0066,
+#7b2ff7
+);
+
+color:white;
+font-size:16px;
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+0 0 20px rgba(255,0,102,0.4);
 }
 
 #btnBatal:active{
-  transform:scale(0.96);
-}
-/* GLOW ANIMATION */
-.glow{
-  animation:glowPulse 2s infinite;
+transform:scale(0.95);
 }
 
-@keyframes glowPulse{
+/* MOBILE */
 
-  0%{
-    box-shadow:
-    0 0 15px #ff00aa55,
-    0 0 15px #0055ff55;
-  }
-
-  50%{
-    box-shadow:
-    0 0 35px #ff00aa99,
-    0 0 35px #0055ff99;
-  }
-
-  100%{
-    box-shadow:
-    0 0 15px #ff00aa55,
-    0 0 15px #0055ff55;
-  }
-
-}
-
-/* RESPONSIVE */
 @media(max-width:500px){
 
-  .card{
-    width:92%;
-    padding:25px;
-  }
+.card{
+padding:24px;
+}
 
-  h1{
-    font-size:28px;
-  }
+h1{
+font-size:28px;
+}
+
+video{
+height:300px;
+}
 
 }
 
@@ -290,16 +296,25 @@ APOTEK NADHIRA FARMA
 
 <div id="clock"></div>
 
-<div class="video-wrapper glow">
+<div class="video-wrapper">
 
-  <video id="video" autoplay muted playsinline></video>
+<video
+id="video"
+autoplay
+muted
+playsinline>
+</video>
 
-  <div class="scan"></div>
-  
+<div class="scan"></div>
+
 <div class="face-grid"></div>
+
 </div>
 
-<canvas id="canvas" style="display:none;"></canvas>
+<canvas
+id="canvas"
+style="display:none;">
+</canvas>
 
 <div id="status">
 ⏳ Loading AI...
@@ -313,412 +328,456 @@ APOTEK NADHIRA FARMA
 
 <script>
 
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
-const statusText = document.getElementById("status");
+const video =
+document.getElementById("video");
+
+const canvas =
+document.getElementById("canvas");
+
+const statusText =
+document.getElementById("status");
+
 const clock =
 document.getElementById("clock");
 
+let faceMatcher;
+
+let sudahAbsen = false;
+
+let sedangDeteksi = false;
+
+/* JAM */
+
 setInterval(()=>{
 
-  const now = new Date();
+const now = new Date();
 
-  clock.innerHTML =
-  now.toLocaleTimeString(
-    'id-ID'
-  ) + " WIB";
+clock.innerHTML =
+now.toLocaleTimeString('id-ID')
++ " WIB";
 
 },1000);
-let faceMatcher;
-let sudahAbsen = false;
-let sedangDeteksi = false;
-  
+
+/* START CAMERA */
+
 async function start(){
 
-  try{
+try{
 
-    statusText.innerHTML =
-    "🧠 Loading AI Model...";
+statusText.innerHTML =
+"🧠 Loading AI Model...";
 
-    await faceapi.nets.tinyFaceDetector.loadFromUri('./weights');
+await faceapi.nets.tinyFaceDetector.loadFromUri('./weights');
 
-    await faceapi.nets.faceLandmark68Net.loadFromUri('./weights');
+await faceapi.nets.faceLandmark68Net.loadFromUri('./weights');
 
-    await faceapi.nets.faceRecognitionNet.loadFromUri('./weights');
+await faceapi.nets.faceRecognitionNet.loadFromUri('./weights');
 
-    statusText.innerHTML =
-    "📸 Membuka kamera...";
+const stream =
+await navigator.mediaDevices.getUserMedia({
+video:true
+});
 
-    const stream =
-    await navigator.mediaDevices.getUserMedia({
-      video:true
-    });
+video.srcObject = stream;
 
-    video.srcObject = stream;
-
-    statusText.innerHTML =
+statusText.innerHTML =
 "📸 Posisikan Wajah Dalam Bingkai";
 
-  }
+}catch(err){
 
-  catch(err){
+console.log(err);
 
-    console.log(err);
-
-    statusText.innerHTML =
-    "❌ ERROR: " + err.message;
-
-  }
+statusText.innerHTML =
+"❌ " + err.message;
 
 }
+
+}
+
+/* LOAD FACE */
 
 async function loadLabeledImages(){
 
-  const labels = [
+const labels = [
 
-    "Al_Hafiz",
-    "Meisyi_Amalia",
-    "Putri_Sinta",
-    "Delpi_Vira",
-    "Yolan_Alfarel"
+"Al_Hafiz",
+"Meisyi_Amalia",
+"Putri_Sinta",
+"Delpi_Vira",
+"Yolan_Alfarel"
 
-  ];
+];
 
-  return Promise.all(
+return Promise.all(
 
-    labels.map(async label => {
+labels.map(async label => {
 
-      const img =
-      await faceapi.fetchImage(
-        `./database_wajah/${label}.jpg`
-      );
+const img =
+await faceapi.fetchImage(
+`./database_wajah/${label}.jpg`
+);
 
-      const detections =
-      await faceapi
-      .detectSingleFace(
-        img,
-        new faceapi.TinyFaceDetectorOptions()
-      )
-      .withFaceLandmarks()
-      .withFaceDescriptor();
+const detections =
+await faceapi
+.detectSingleFace(
+img,
+new faceapi.TinyFaceDetectorOptions()
+)
+.withFaceLandmarks()
+.withFaceDescriptor();
 
-      if(!detections){
+if(!detections){
 
-        console.log("GAGAL DETEKSI:", label);
-
-        return null;
-
-      }
-
-      return new faceapi.LabeledFaceDescriptors(
-        label,
-        [detections.descriptor]
-      );
-
-    })
-
-  );
+return null;
 
 }
+
+return new faceapi.LabeledFaceDescriptors(
+label,
+[detections.descriptor]
+);
+
+})
+
+);
+
+}
+
+/* START AI */
 
 async function startRecognition(){
 
-  const labeledDescriptors =
-  (await loadLabeledImages())
-  .filter(x => x !== null);
+const labeledDescriptors =
+(await loadLabeledImages())
+.filter(x => x !== null);
 
-  faceMatcher =
-  new faceapi.FaceMatcher(
-    labeledDescriptors,
-    0.55
-  );
+faceMatcher =
+new faceapi.FaceMatcher(
+labeledDescriptors,
+0.55
+);
 
-  setInterval(async ()=>{
+setInterval(async ()=>{
 
-    const detections =
-    await faceapi
-    .detectAllFaces(
-      video,
-      new faceapi.TinyFaceDetectorOptions()
-    )
-    .withFaceLandmarks()
-    .withFaceDescriptors();
+const detections =
+await faceapi
+.detectAllFaces(
+video,
+new faceapi.TinyFaceDetectorOptions()
+)
+.withFaceLandmarks()
+.withFaceDescriptors();
 
-    if(detections.length > 0){
+if(detections.length > 0){
 
-      const bestMatch =
-      faceMatcher.findBestMatch(
-        detections[0].descriptor
-      );
+const bestMatch =
+faceMatcher.findBestMatch(
+detections[0].descriptor
+);
 
-      console.log(bestMatch);
+/* GLOW */
 
-      statusText.innerHTML =
-      "👤 " + bestMatch.toString();
+if(bestMatch.label !== "unknown"){
+
 document
 .querySelector(".video-wrapper")
 .style.boxShadow = `
-0 0 30px #ff00aa,
+0 0 35px #ff00aa,
 0 0 60px #0055ff
 `;
-      else{
 
-  document
-  .querySelector(".video-wrapper")
-  .style.boxShadow = `
-  0 0 20px #0055ff44,
-  0 0 20px #ff00aa44
-  `;
+}else{
+
+document
+.querySelector(".video-wrapper")
+.style.boxShadow = `
+0 0 20px #0055ff55,
+0 0 20px #ff00aa55
+`;
 
 }
-      if(
-  bestMatch.label !== "unknown"
-  &&
-  !sudahAbsen
-  &&
-  !sedangDeteksi
+
+statusText.innerHTML =
+"👤 " + bestMatch.toString();
+
+/* DETEKSI */
+
+if(
+bestMatch.label !== "unknown"
+&&
+!sudahAbsen
+&&
+!sedangDeteksi
 ){
 
-        sedangDeteksi = true;
-        
-        statusText.innerHTML = `
+sedangDeteksi = true;
+
+statusText.innerHTML = `
 ✅ BERHASIL MENDETEKSI WAJAH<br><br>
 👤 ${bestMatch.label.replaceAll("_"," ")}
 `;
 
 setTimeout(()=>{
 
-  kirimAbsensi(bestMatch.label);
+kirimAbsensi(bestMatch.label);
 
-},1000);
-
-      }
-
-    }
-
-  },1000);
+},800);
 
 }
 
+}
+
+},1000);
+
+}
+
+/* ABSENSI */
+
 async function kirimAbsensi(nama){
 
-  if(sudahAbsen) return;
+if(sudahAbsen) return;
 
-  sudahAbsen = true;
+sudahAbsen = true;
 
-  const audio =
-  new Audio(
-    "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
-  );
+/* SOUND */
 
-  audio.play();
+const audio =
+new Audio(
+"https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+);
 
-  statusText.innerHTML =
-  "📸 Mengambil selfie...";
+audio.play();
 
-  canvas.width = video.videoWidth;
+/* FOTO */
 
-  canvas.height = video.videoHeight;
+canvas.width =
+video.videoWidth;
 
-  const ctx =
-  canvas.getContext("2d");
+canvas.height =
+video.videoHeight;
 
-  ctx.drawImage(
-    video,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+const ctx =
+canvas.getContext("2d");
 
-  const foto =
-  canvas.toDataURL("image/png");
+ctx.drawImage(
+video,
+0,
+0,
+canvas.width,
+canvas.height
+);
 
-  statusText.innerHTML =
-  "📤 Mengirim absensi...";
+const foto =
+canvas.toDataURL("image/png");
 
-  try{
+statusText.innerHTML =
+"📤 Mengirim absensi...";
 
-    const response =
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbx7fkoLgH6igHP17przjmxWaP8bQNG_6OcoQ3-Ug79A_vmZxK6_ibCdLC0u-W-JLtw3/exec",
-      {
-        method:"POST",
-        body:JSON.stringify({
+try{
 
-          nama:nama,
-          foto:foto
+const response =
+await fetch(
+"https://script.google.com/macros/s/AKfycbx7fkoLgH6igHP17przjmxWaP8bQNG_6OcoQ3-Ug79A_vmZxK6_ibCdLC0u-W-JLtw3/exec",
+{
+method:"POST",
+body:JSON.stringify({
 
-        })
-      }
-    );
+nama:nama,
+foto:foto
 
-    const hasil =
-    await response.json();
+})
+}
+);
 
-    console.log(hasil);
+const hasil =
+await response.json();
 
-    // MATIKAN KAMERA
-    if(video.srcObject){
+console.log(hasil);
 
-      video.srcObject
-      .getTracks()
-      .forEach(track => track.stop());
+/* STOP CAMERA */
 
-    }
+if(video.srcObject){
 
-    // TAMPILAN BERHASIL
-    document.body.innerHTML = `
+video.srcObject
+.getTracks()
+.forEach(track => track.stop());
 
-    <div style="
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    background:#eef2f7;
-    font-family:Arial;
-    padding:20px;
-    ">
+}
 
-      <div style="
-      background:white;
-      padding:40px;
-      border-radius:30px;
-      text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,0.1);
-      width:100%;
-      max-width:400px;
-      ">
+/* SUCCESS SCREEN */
 
-        <div style="font-size:90px;">
-          ✅
-        </div>
+document.body.innerHTML = `
 
-        <h1 style="
-        color:#1e3a8a;
-        ">
-          ABSEN BERHASIL
-        </h1>
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#eef2f7;
+font-family:Poppins;
+padding:20px;
+">
 
-        <p style="
-        font-size:24px;
-        font-weight:bold;
-        ">
-          ${nama.replaceAll("_"," ")}
-        </p>
+<div style="
+background:white;
+padding:40px;
+border-radius:35px;
+text-align:center;
+max-width:400px;
+width:100%;
+box-shadow:
+0 10px 40px rgba(0,0,0,0.1),
+0 0 25px #ff00aa33,
+0 0 25px #0055ff33;
+">
 
-        <p style="
-        font-size:18px;
-        color:#444;
-        ">
-          Kamu sudah absen hari ini
-        </p>
+<div style="
+font-size:90px;
+">
+✅
+</div>
 
-        <p style="
-        color:green;
-        font-weight:bold;
-        font-size:20px;
-        ">
-          🎉 Selamat bekerja
-        </p>
-<br><br>
+<h1 style="
+color:#0055ff;
+margin-bottom:15px;
+">
+ABSEN BERHASIL
+</h1>
 
-<button onclick="window.location.href=window.location.href" style="
-padding:14px 28px;
+<p style="
+font-size:26px;
+font-weight:bold;
+margin-bottom:10px;
+">
+${nama.replaceAll("_"," ")}
+</p>
+
+<p style="
+font-size:18px;
+color:#555;
+margin-bottom:20px;
+">
+Kamu sudah absen hari ini
+</p>
+
+<p style="
+font-size:20px;
+font-weight:bold;
+color:#00aa55;
+margin-bottom:30px;
+">
+🎉 Selamat bekerja
+</p>
+
+<button onclick="location.reload()" style="
+padding:15px 28px;
 border:none;
 border-radius:18px;
-background:linear-gradient(135deg,#0044ff,#ff00aa);
+background:linear-gradient(
+135deg,
+#0055ff,
+#ff008c
+);
 color:white;
 font-size:16px;
 font-weight:bold;
 cursor:pointer;
 box-shadow:
-0 0 20px rgba(0,119,255,0.4);
+0 0 20px #0055ff55;
 ">
 🚪 KELUAR APLIKASI
 </button>
-      </div>
 
-    </div>
+</div>
 
-    `;
+</div>
+
+`;
+
+}catch(err){
+
+console.log(err);
+
+statusText.innerHTML =
+"❌ GAGAL MENGIRIM";
+
+sudahAbsen = false;
+
 sedangDeteksi = false;
-  }
-
-  catch(err){
-
-    console.log(err);
-
-    statusText.innerHTML =
-    "❌ GAGAL MENGIRIM ABSENSI";
-
-    sudahAbsen = false;
-
-  }
 
 }
+
+}
+
+/* BATAL */
+
 document
 .getElementById("btnBatal")
 .onclick = ()=>{
 
-  // MATIKAN KAMERA
-  if(video.srcObject){
+if(video.srcObject){
 
-    video.srcObject
-    .getTracks()
-    .forEach(track => track.stop());
+video.srcObject
+.getTracks()
+.forEach(track => track.stop());
 
-  }
+}
 
-  // TAMPILAN BATAL
-  document.body.innerHTML = `
+document.body.innerHTML = `
 
-  <div style="
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  background:#eef2f7;
-  font-family:Arial;
-  ">
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#eef2f7;
+font-family:Poppins;
+">
 
-    <div style="
-    background:white;
-    padding:40px;
-    border-radius:30px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.1);
-    ">
+<div style="
+background:white;
+padding:40px;
+border-radius:35px;
+text-align:center;
+box-shadow:
+0 10px 30px rgba(0,0,0,0.1);
+">
 
-      <div style="font-size:80px;">
-        ❌
-      </div>
+<div style="
+font-size:90px;
+">
+❌
+</div>
 
-      <h1 style="
-      color:#ff0066;
-      ">
-        ABSENSI DIBATALKAN
-      </h1>
+<h1 style="
+color:#ff0066;
+margin-bottom:15px;
+">
+ABSENSI DIBATALKAN
+</h1>
 
-      <p style="
-      font-size:18px;
-      color:#555;
-      ">
-        Kamera telah dimatikan
-      </p>
+<p style="
+font-size:18px;
+color:#555;
+">
+Kamera telah dimatikan
+</p>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-  `;
+`;
 
 };
+
+/* LOAD */
+
 window.onload = async ()=>{
 
-  await start();
+await start();
 
-  await startRecognition();
+await startRecognition();
 
 };
 
@@ -726,4 +785,3 @@ window.onload = async ()=>{
 
 </body>
 </html>
-
