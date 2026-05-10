@@ -124,7 +124,7 @@ h1{
 
 video{
   width:100%;
-  height:420px;
+  height:300px;
   object-fit:cover;
   display:block;
   background:black;
@@ -148,7 +148,51 @@ video{
 }
 
 @keyframes scanMove{
+.face-grid{
+  position:absolute;
+  inset:0;
 
+  background:
+
+  linear-gradient(
+    rgba(255,255,255,0.08) 1px,
+    transparent 1px
+  ),
+
+  linear-gradient(
+    90deg,
+    rgba(255,255,255,0.08) 1px,
+    transparent 1px
+  );
+
+  background-size:35px 35px;
+
+  opacity:0;
+
+  animation:gridPulse 2s infinite;
+
+  pointer-events:none;
+}
+
+/* ANIMASI GRID */
+@keyframes gridPulse{
+
+  0%{
+    opacity:0;
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.02);
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(1);
+  }
+
+}
   0%{
     top:0%;
   }
@@ -251,7 +295,8 @@ APOTEK NADHIRA FARMA
   <video id="video" autoplay muted playsinline></video>
 
   <div class="scan"></div>
-
+  
+<div class="face-grid"></div>
 </div>
 
 <canvas id="canvas" style="display:none;"></canvas>
@@ -410,7 +455,22 @@ async function startRecognition(){
 
       statusText.innerHTML =
       "👤 " + bestMatch.toString();
+document
+.querySelector(".video-wrapper")
+.style.boxShadow = `
+0 0 30px #ff00aa,
+0 0 60px #0055ff
+`;
+      else{
 
+  document
+  .querySelector(".video-wrapper")
+  .style.boxShadow = `
+  0 0 20px #0055ff44,
+  0 0 20px #ff00aa44
+  `;
+
+}
       if(
   bestMatch.label !== "unknown"
   &&
@@ -430,7 +490,7 @@ setTimeout(()=>{
 
   kirimAbsensi(bestMatch.label);
 
-},2000);
+},1000);
 
       }
 
@@ -563,7 +623,7 @@ async function kirimAbsensi(nama){
         </p>
 <br><br>
 
-<button ontouchstart="location.reload()" style="
+<button onclick="window.location.href=window.location.href" style="
 padding:14px 28px;
 border:none;
 border-radius:18px;
