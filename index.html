@@ -850,16 +850,16 @@ color:#00aa55;
 margin-bottom:35px;
 ">
 🎉 Selamat bekerja
-
 </p>
 
 <button
 id="btnKeluar"
 style="
-
 margin-top:35px;
 
-width:340px;
+width:100%;
+max-width:360px;
+
 height:72px;
 
 display:flex;
@@ -882,7 +882,7 @@ linear-gradient(
 
 color:white;
 
-font-size:20px;
+font-size:18px;
 font-weight:700;
 
 white-space:nowrap;
@@ -891,7 +891,6 @@ box-shadow:
 0 12px 35px rgba(255,0,170,0.35);
 
 cursor:pointer;
-
 "
 
 >
@@ -902,7 +901,24 @@ cursor:pointer;
 
 </div>
 
+</div>
+
 `;
+
+setTimeout(()=>{
+
+const btn =
+document.getElementById("btnKeluar");
+
+if(btn){
+
+btn.onclick = tutupAplikasi;
+
+btn.ontouchstart = tutupAplikasi;
+
+}
+
+},300);
 
 }catch(err){
 
@@ -993,13 +1009,7 @@ await startRecognition();
 function tutupAplikasi(){
 
   document.body.innerHTML = `
-document
-.getElementById("btnKeluar")
-.addEventListener("click", tutupAplikasi);
 
-document
-.getElementById("btnKeluar")
-.addEventListener("touchstart", tutupAplikasi);
   <div style="
   height:100vh;
   display:flex;
