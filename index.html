@@ -387,7 +387,16 @@ async function startRecognition(){
         !sudahAbsen
       ){
 
-        kirimAbsensi(bestMatch.label);
+        statusText.innerHTML = `
+✅ BERHASIL MENDETEKSI WAJAH<br><br>
+👤 ${bestMatch.label.replaceAll("_"," ")}
+`;
+
+setTimeout(()=>{
+
+  kirimAbsensi(bestMatch.label);
+
+},2000);
 
       }
 
