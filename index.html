@@ -163,7 +163,23 @@ video{
   font-weight:600;
   color:#111;
 }
+#btnBatal{
+  margin-top:25px;
+  padding:14px 25px;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ff0066,#7b2ff7);
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:
+  0 0 20px rgba(255,0,102,0.4);
+}
 
+#btnBatal:active{
+  transform:scale(0.96);
+}
 /* GLOW ANIMATION */
 .glow{
   animation:glowPulse 2s infinite;
@@ -232,9 +248,9 @@ APOTEK NADHIRA FARMA
 
 <canvas id="canvas" style="display:none;"></canvas>
 
-<div id="status">
-⏳ Loading AI...
-</div>
+<button id="btnBatal">
+❌ BATAL ABSEN
+</button>
 
 </div>
 
@@ -284,7 +300,7 @@ async function start(){
     video.srcObject = stream;
 
     statusText.innerHTML =
-    "✅ Posisikan Wajah Anda Dalam Bingkai";
+"📸 Posisikan Wajah Dalam Bingkai";
 
   }
 
@@ -533,7 +549,22 @@ async function kirimAbsensi(nama){
         ">
           🎉 Selamat bekerja
         </p>
+<br><br>
 
+<button onclick="tutupAplikasi()" style="
+padding:14px 28px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#0044ff,#ff00aa);
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:
+0 0 20px rgba(0,119,255,0.4);
+">
+🚪 KELUAR APLIKASI
+</button>
       </div>
 
     </div>
@@ -554,7 +585,63 @@ sedangDeteksi = false;
   }
 
 }
+document
+.getElementById("btnBatal")
+.onclick = ()=>{
 
+  // MATIKAN KAMERA
+  if(video.srcObject){
+
+    video.srcObject
+    .getTracks()
+    .forEach(track => track.stop());
+
+  }
+
+  // TAMPILAN BATAL
+  document.body.innerHTML = `
+
+  <div style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:#eef2f7;
+  font-family:Arial;
+  ">
+
+    <div style="
+    background:white;
+    padding:40px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    ">
+
+      <div style="font-size:80px;">
+        ❌
+      </div>
+
+      <h1 style="
+      color:#ff0066;
+      ">
+        ABSENSI DIBATALKAN
+      </h1>
+
+      <p style="
+      font-size:18px;
+      color:#555;
+      ">
+        Kamera telah dimatikan
+      </p>
+
+    </div>
+
+  </div>
+
+  `;
+
+};
 window.onload = async ()=>{
 
   await start();
@@ -567,3 +654,48 @@ window.onload = async ()=>{
 
 </body>
 </html>
+function tutupAplikasi(){
+
+  document.body.innerHTML = `
+
+  <div style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:#eef2f7;
+  font-family:Arial;
+  ">
+
+    <div style="
+    background:white;
+    padding:40px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    ">
+
+      <div style="font-size:90px;">
+        👋
+      </div>
+
+      <h1 style="
+      color:#1e3a8a;
+      ">
+        TERIMA KASIH
+      </h1>
+
+      <p style="
+      font-size:18px;
+      color:#555;
+      ">
+        Sampai jumpa kembali
+      </p>
+
+    </div>
+
+  </div>
+
+  `;
+
+}
