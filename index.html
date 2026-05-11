@@ -539,7 +539,136 @@ let faceMatcher;
 let sudahAbsen = false;
 
 let sedangDeteksi = false;
+/* =========================
+   GEOLOCATION APOTEK
+========================= */
 
+/* GANTI DENGAN KOORDINAT APOTEK */
+const APOTEK_LAT = -3.2733637;
+const APOTEK_LON = 104.8819249;
+
+/* RADIUS MAKSIMAL ABSEN */
+const MAX_RADIUS = 15; // meter
+
+/* HITUNG JARAK */
+function hitungJarak(lat1, lon1, lat2, lon2){
+
+const R = 6371000;
+
+const dLat =
+(lat2-lat1) * Math.PI/180;
+
+const dLon =
+(lon2-lon1) * Math.PI/180;
+
+const a =
+Math.sin(dLat/2) *
+Math.sin(dLat/2)
++
+Math.cos(lat1*Math.PI/180) *
+Math.cos(lat2*Math.PI/180)
+*
+Math.sin(dLon/2) *
+Math.sin(dLon/2);
+
+const c =
+2 * Math.atan2(
+Math.sqrt(a),
+Math.sqrt(1-a)
+);
+
+return R * c;
+
+}
+
+/* CEK LOKASI USER */
+async function cekLokasi(nama){
+
+/* YOLAN BEBAS ABSEN DIMANA SAJA */
+if(nama === "Yolan_Alfarel"){
+
+return true;
+
+}
+
+return new Promise((resolve)=>{
+
+if(!navigator.geolocation){
+
+alert("GPS tidak didukung browser");
+
+resolve(false);
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+(position)=>{
+
+const userLat =
+position.coords.latitude;
+
+const userLon =
+position.coords.longitude;
+if(position.coords.accuracy > 20){
+
+alert("GPS kurang akurat");
+
+resolve(false);
+
+return;
+
+}
+const jarak =
+hitungJarak(
+userLat,
+userLon,
+APOTEK_LAT,
+APOTEK_LON
+);
+
+console.log(
+"Jarak ke apotek:",
+jarak
+);
+
+if(jarak <= MAX_RADIUS){
+
+resolve(true);
+
+}else{
+
+resolve(false);
+
+}
+
+},
+
+(error)=>{
+
+console.log(error);
+
+alert(
+"GPS gagal diakses"
+);
+
+resolve(false);
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:10000,
+maximumAge:0
+}
+
+);
+
+});
+
+}
 /* CLOCK */
 
 setInterval(()=>{
@@ -829,7 +958,26 @@ statusText.innerHTML = `
 👤 ${bestMatch.label.replaceAll("_"," ")}
 `;
 
-setTimeout(()=>{
+setTimeout(async ()=>{
+
+statusText.innerHTML =
+"📍 Mengecek lokasi GPS...";
+
+const lokasiValid =
+await cekLokasi(bestMatch.label);
+
+if(!lokasiValid){
+
+statusText.innerHTML = `
+❌ LOKASI DI LUAR AREA ABSEN<br><br>
+📍 Maksimal radius 10 meter dari Apotek
+`;
+
+sedangDeteksi = false;
+
+return;
+
+}
 
 cekAbsensi(bestMatch.label);
 
