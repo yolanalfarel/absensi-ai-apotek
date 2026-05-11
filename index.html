@@ -835,6 +835,13 @@ contour[i+1]
 
 }
 
+   /* Dahi */
+
+connect(17,27);
+
+connect(27,26);
+
+connect(17,26);
 /* =========================
    EYEBROWS
 ========================= */
@@ -878,46 +885,33 @@ rightEye[i+1]
 /* =========================
    NOSE
 ========================= */
+/* HIDUNG CLEAN */
 
+connect(27,30);
+
+connect(30,33);
+
+/* MULUT CLEAN */
+
+connect(48,54);
+
+connect(48,57);
+
+connect(54,57);
 [27,28,29,30].forEach((v,i,a)=>{
 if(i<a.length-1) connect(v,a[i+1]);
 });
 
-connect(31,33);
-connect(33,35);
-connect(31,27);
-connect(35,27);
-
-/* =========================
-   MOUTH
-========================= */
-
-const mouth =
-[48,49,50,51,52,53,54,55,56,57,58,59,48];
-
-for(let i=0;i<mouth.length-1;i++){
-
-connect(
-mouth[i],
-mouth[i+1]
-);
-
 }
 
-/* =========================
-   IMPORTANT FACE TRIANGLES
-========================= */
+/* FACE ID CLEAN CONNECTION */
 
-connect(36,31);
-connect(31,48);
+connect(36,27);
 
-connect(45,35);
-connect(35,54);
-
-connect(39,27);
 connect(42,27);
 
 connect(48,8);
+
 connect(54,8);
 
 /* GAMBAR TITIK */
