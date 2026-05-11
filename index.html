@@ -902,8 +902,6 @@ connect(54,57);
 if(i<a.length-1) connect(v,a[i+1]);
 });
 
-}
-
 /* FACE ID CLEAN CONNECTION */
 
 connect(36,27);
@@ -923,103 +921,7 @@ connect(54,8);
 48,51,54,57,
 8
 ].forEach(point);
-/* CLEAR */
-
-faceCtx.clearRect(
-0,
-0,
-faceCanvas.width,
-faceCanvas.height
-);
-
-/* WARNA */
-
-faceCtx.strokeStyle =
-"#7df9ff";
-
-faceCtx.fillStyle =
-"#cfffff";
-
-faceCtx.lineWidth = 1;
-
-faceCtx.shadowColor =
-"#00ffee";
-
-faceCtx.shadowBlur = 10;
-
-/* =========================
-   FACE CONTOUR
-========================= */
-
-const jaw =
-points.slice(0,17);
-
-faceCtx.beginPath();
-
-jaw.forEach((p,i)=>{
-
-if(i===0){
-
-faceCtx.moveTo(p.x,p.y);
-
-}else{
-
-faceCtx.lineTo(p.x,p.y);
-
-}
-
-});
-
-faceCtx.stroke();
-
-/* =========================
-   EYES
-========================= */
-
-function drawMesh(start,end){
-
-faceCtx.beginPath();
-
-for(let i=start;i<=end;i++){
-
-const p = points[i];
-
-if(i===start){
-
-faceCtx.moveTo(p.x,p.y);
-
-}else{
-
-faceCtx.lineTo(p.x,p.y);
-
-}
-
-}
-
-faceCtx.closePath();
-
-faceCtx.stroke();
-
-}
-
-/* MATA */
-
-drawMesh(36,41);
-drawMesh(42,47);
-
-/* ALIS */
-
-drawMesh(17,21);
-drawMesh(22,26);
-
-/* HIDUNG */
-
-drawMesh(27,35);
-
-/* MULUT */
-
-drawMesh(48,59);
-
+   
 /* =========================
    FACE CORNER AUTO FRAME
 ========================= */
