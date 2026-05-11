@@ -752,25 +752,6 @@ faceCanvas.height
 const landmarks =
 detections[0].landmarks.positions;
 
-/* PARTICLE */
-
-faceCtx.fillStyle =
-"#00ffee";
-
-/* GARIS */
-
-faceCtx.strokeStyle =
-"#00ffee";
-
-faceCtx.lineWidth = 1.2;
-
-/* FACE MESH */
-
-for(let i=0;i<landmarks.length;i++){
-
-const point =
-landmarks[i];
-
 /* FULL FACE HOLOGRAM */
 
 faceCtx.beginPath();
@@ -790,6 +771,20 @@ faceCtx.lineTo(p.x,p.y);
 }
 
 }
+
+faceCtx.closePath();
+
+faceCtx.strokeStyle =
+"#00ffee";
+
+faceCtx.lineWidth = 1.8;
+
+faceCtx.shadowColor =
+"#00ffee";
+
+faceCtx.shadowBlur = 14;
+
+faceCtx.stroke();
 
 faceCtx.closePath();
 
