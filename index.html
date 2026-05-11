@@ -916,10 +916,10 @@ faceCanvas.height
 );
 
 }
-const x = box.x;
-const y = box.y;
-const w = box.width;
-const h = box.height;
+const faceX = box.x;
+const faceY = box.y;
+const faceW = box.width;
+const faceH = box.height;
 
 const c = 25;
 
@@ -937,9 +937,9 @@ faceCtx.shadowBlur = 15;
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x,y+c);
-faceCtx.lineTo(x,y);
-faceCtx.lineTo(x+c,y);
+faceCtx.moveTo(faceX,faceY+c);
+faceCtx.lineTo(faceX,faceY);
+faceCtx.lineTo(faceX+c,faceY);
 
 faceCtx.stroke();
 
@@ -947,9 +947,9 @@ faceCtx.stroke();
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x+w-c,y);
-faceCtx.lineTo(x+w,y);
-faceCtx.lineTo(x+w,y+c);
+faceCtx.moveTo(faceX+faceW-c,faceY);
+faceCtx.lineTo(faceX+faceW,faceY);
+faceCtx.lineTo(faceX+faceW,faceY+c);
 
 faceCtx.stroke();
 
@@ -957,9 +957,9 @@ faceCtx.stroke();
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x,y+h-c);
-faceCtx.lineTo(x,y+h);
-faceCtx.lineTo(x+c,y+h);
+faceCtx.moveTo(faceX,faceY+faceH-c);
+faceCtx.lineTo(faceX,faceY+faceH);
+faceCtx.lineTo(faceX+c,faceY+faceH);
 
 faceCtx.stroke();
 
@@ -967,9 +967,9 @@ faceCtx.stroke();
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x+w-c,y+h);
-faceCtx.lineTo(x+w,y+h);
-faceCtx.lineTo(x+w,y+h-c);
+faceCtx.moveTo(faceX+faceW-c,faceY+faceH);
+faceCtx.lineTo(faceX+faceW,faceY+faceH);
+faceCtx.lineTo(faceX+faceW,faceY+faceH-c);
 
 faceCtx.stroke();
    
@@ -1067,9 +1067,9 @@ faceCtx.shadowBlur = 15;
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x,y+corner);
-faceCtx.lineTo(x,y);
-faceCtx.lineTo(x+corner,y);
+faceCtx.moveTo(faceX,faceY+c);
+faceCtx.lineTo(faceX,faceY);
+faceCtx.lineTo(faceX+c,faceY);
 
 faceCtx.stroke();
 
@@ -1077,19 +1077,18 @@ faceCtx.stroke();
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x+w-corner,y);
-faceCtx.lineTo(x+w,y);
-faceCtx.lineTo(x+w,y+corner);
-
+faceCtx.moveTo(faceX+faceW-c,faceY);
+faceCtx.lineTo(faceX+faceW,faceY);
+faceCtx.lineTo(faceX+faceW,faceY+c);
 faceCtx.stroke();
 
 /* BOTTOM LEFT */
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x,y+h-corner);
-faceCtx.lineTo(x,y+h);
-faceCtx.lineTo(x+corner,y+h);
+faceCtx.moveTo(faceX,faceY+faceH-c);
+faceCtx.lineTo(faceX,faceY+faceH);
+faceCtx.lineTo(faceX+c,faceY+faceH);
 
 faceCtx.stroke();
 
@@ -1097,9 +1096,9 @@ faceCtx.stroke();
 
 faceCtx.beginPath();
 
-faceCtx.moveTo(x+w-corner,y+h);
-faceCtx.lineTo(x+w,y+h);
-faceCtx.lineTo(x+w,y+h-corner);
+faceCtx.moveTo(faceX+faceW-c,faceY+faceH);
+faceCtx.lineTo(faceX+faceW,faceY+faceH);
+faceCtx.lineTo(faceX+faceW,faceY+faceH-c);
 
 faceCtx.stroke();
 /* RADAR */
