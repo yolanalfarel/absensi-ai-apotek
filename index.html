@@ -172,7 +172,52 @@ margin-bottom:20px;
 /* VIDEO */
 
 .video-wrapper{
+/* FUTURISTIC CORNER */
 
+.corner{
+
+position:absolute;
+
+width:45px;
+height:45px;
+
+border:4px solid #ffee00;
+
+z-index:20;
+
+box-shadow:
+0 0 15px #ffee00,
+0 0 25px #ffee00;
+
+}
+
+.corner-tl{
+top:12px;
+left:12px;
+border-right:none;
+border-bottom:none;
+}
+
+.corner-tr{
+top:12px;
+right:12px;
+border-left:none;
+border-bottom:none;
+}
+
+.corner-bl{
+bottom:12px;
+left:12px;
+border-right:none;
+border-top:none;
+}
+
+.corner-br{
+bottom:12px;
+right:12px;
+border-left:none;
+border-top:none;
+}
 position:relative;
 
 border-radius:28px;
@@ -432,7 +477,10 @@ playsinline>
 <div class="scan"></div>
 
 <div class="face-grid"></div>
-
+<div class="corner corner-tl"></div>
+<div class="corner corner-tr"></div>
+<div class="corner corner-bl"></div>
+<div class="corner corner-br"></div>
 </div>
 
 <canvas
@@ -752,51 +800,79 @@ faceCanvas.height
 const landmarks =
 detections[0].landmarks.positions;
 
-/* FULL FACE HOLOGRAM */
-
-faceCtx.beginPath();
-
-for(let i = 0; i < landmarks.length; i++){
-
-const p = landmarks[i];
-
-if(i === 0){
-
-faceCtx.moveTo(p.x,p.y);
-
-}else{
-
-faceCtx.lineTo(p.x,p.y);
-
-}
-
-}
-
-faceCtx.closePath();
+/* =========================
+   FUTURISTIC FACE MESH
+========================= */
 
 faceCtx.strokeStyle =
-"#00ffee";
+"#66ffff";
 
-faceCtx.lineWidth = 1.8;
+faceCtx.fillStyle =
+"#66ffff";
+
+faceCtx.lineWidth = 1.2;
 
 faceCtx.shadowColor =
 "#00ffee";
 
-faceCtx.shadowBlur = 14;
+faceCtx.shadowBlur = 12;
+
+/* DRAW POINT */
+
+landmarks.forEach(point=>{
+
+faceCtx.beginPath();
+
+faceCtx.arc(
+point.x,
+point.y,
+1.8,
+0,
+Math.PI*2
+);
+
+faceCtx.fill();
+
+});
+
+/* CONNECT ALL POINTS */
+
+for(let i=0;i<landmarks.length;i++){
+
+for(let j=i+1;j<landmarks.length;j++){
+
+const p1 = landmarks[i];
+const p2 = landmarks[j];
+
+const dx = p1.x - p2.x;
+const dy = p1.y - p2.y;
+
+const distance =
+Math.sqrt(dx*dx + dy*dy);
+
+/* CONNECT ONLY CLOSE POINTS */
+
+if(distance < 42){
+
+faceCtx.beginPath();
+
+faceCtx.moveTo(
+p1.x,
+p1.y
+);
+
+faceCtx.lineTo(
+p2.x,
+p2.y
+);
 
 faceCtx.stroke();
 
-faceCtx.closePath();
+}
 
-faceCtx.strokeStyle = "#00ffee";
+}
 
-faceCtx.lineWidth = 1.8;
-
-faceCtx.shadowColor = "#00ffee";
-
-faceCtx.shadowBlur = 14;
-
-faceCtx.stroke();
+}
    
 /* RADAR */
 
