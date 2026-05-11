@@ -446,7 +446,7 @@ style="display:none;">
 </canvas>
 
 <div id="status">
-⏳ Loading AI...
+⏳ Loading Face ID...
 </div>
 
 <button id="btnBatal">
@@ -687,7 +687,7 @@ await faceapi
 img,
 new faceapi.TinyFaceDetectorOptions({
 inputSize: 416,
-scoreThreshold: 0.5
+scoreThreshold: 0.4
 })
 )
 .withFaceLandmarks()
@@ -757,12 +757,214 @@ faceCanvas.height
 const landmarks =
 detections[0].landmarks.positions;
 
-   /* =========================
-   PROFESSIONAL FACE MESH
+/* =========================
+   FACE MESH REALISTIC
 ========================= */
 
 const points = landmarks;
 
+/* CLEAR */
+
+faceCtx.clearRect(
+0,
+0,
+faceCanvas.width,
+faceCanvas.height
+);
+
+/* WARNA */
+
+faceCtx.strokeStyle =
+"#7df9ff";
+
+faceCtx.fillStyle =
+"#cfffff";
+
+faceCtx.lineWidth = 1;
+
+faceCtx.shadowColor =
+"#00ffee";
+
+faceCtx.shadowBlur = 10;
+
+/* =========================
+   FACE CONTOUR
+========================= */
+
+const jaw =
+points.slice(0,17);
+
+faceCtx.beginPath();
+
+jaw.forEach((p,i)=>{
+
+if(i===0){
+
+faceCtx.moveTo(p.x,p.y);
+
+}else{
+
+faceCtx.lineTo(p.x,p.y);
+
+}
+
+});
+
+faceCtx.stroke();
+
+/* =========================
+   EYES
+========================= */
+
+function drawMesh(start,end){
+
+faceCtx.beginPath();
+
+for(let i=start;i<=end;i++){
+
+const p = points[i];
+
+if(i===start){
+
+faceCtx.moveTo(p.x,p.y);
+
+}else{
+
+faceCtx.lineTo(p.x,p.y);
+
+}
+
+}
+
+faceCtx.closePath();
+
+faceCtx.stroke();
+
+}
+
+/* MATA */
+
+drawMesh(36,41);
+drawMesh(42,47);
+
+/* ALIS */
+
+drawMesh(17,21);
+drawMesh(22,26);
+
+/* HIDUNG */
+
+drawMesh(27,35);
+
+/* MULUT */
+
+drawMesh(48,59);
+
+/* =========================
+   FACE TRIANGLE LINES
+========================= */
+
+for(let i=0;i<points.length;i++){
+
+for(let j=i+1;j<points.length;j++){
+
+const dx =
+points[i].x - points[j].x;
+
+const dy =
+points[i].y - points[j].y;
+
+const dist =
+Math.sqrt(dx*dx + dy*dy);
+
+/* HUBUNGKAN YANG DEKAT */
+
+if(dist < 32){
+
+faceCtx.beginPath();
+
+faceCtx.moveTo(
+points[i].x,
+points[i].y
+);
+
+faceCtx.lineTo(
+points[j].x,
+points[j].y
+);
+
+faceCtx.stroke();
+
+}
+
+}
+
+}
+
+/* =========================
+   FACE CORNER AUTO FRAME
+========================= */
+
+const box =
+detections[0].detection.box;
+
+const x = box.x;
+const y = box.y;
+const w = box.width;
+const h = box.height;
+
+const c = 25;
+
+faceCtx.strokeStyle =
+"#ffee00";
+
+faceCtx.lineWidth = 3;
+
+faceCtx.shadowColor =
+"#ffee00";
+
+faceCtx.shadowBlur = 15;
+
+/* TL */
+
+faceCtx.beginPath();
+
+faceCtx.moveTo(x,y+c);
+faceCtx.lineTo(x,y);
+faceCtx.lineTo(x+c,y);
+
+faceCtx.stroke();
+
+/* TR */
+
+faceCtx.beginPath();
+
+faceCtx.moveTo(x+w-c,y);
+faceCtx.lineTo(x+w,y);
+faceCtx.lineTo(x+w,y+c);
+
+faceCtx.stroke();
+
+/* BL */
+
+faceCtx.beginPath();
+
+faceCtx.moveTo(x,y+h-c);
+faceCtx.lineTo(x,y+h);
+faceCtx.lineTo(x+c,y+h);
+
+faceCtx.stroke();
+
+/* BR */
+
+faceCtx.beginPath();
+
+faceCtx.moveTo(x+w-c,y+h);
+faceCtx.lineTo(x+w,y+h);
+faceCtx.lineTo(x+w,y+h-c);
+
+faceCtx.stroke();
+   
 /* TITIK */
 
 faceCtx.fillStyle =
@@ -847,12 +1049,12 @@ const h = box.height;
 const corner = 28;
 
 faceCtx.strokeStyle =
-"#ffee00";
+"#00ff99";
 
-faceCtx.lineWidth = 4;
+faceCtx.lineWidth = 3;
 
 faceCtx.shadowColor =
-"#ffee00";
+"#00ff99";
 
 faceCtx.shadowBlur = 15;
 
